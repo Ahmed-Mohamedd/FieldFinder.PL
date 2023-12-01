@@ -10,8 +10,4 @@
     <ProjectReference Include="..\FieldFinder.DAL\FieldFinder.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>
