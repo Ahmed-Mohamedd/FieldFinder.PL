@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FieldFinder.DAL.Entities
 {
-    public  class Coach
+    public  class Category
     {
         public int Id { get; set; }
-
-        
         public string Name { get; set; }
-   
-        public string  Email { get; set; }
-        public string  Phone { get; set; }
-       
-        public int  YearsExperience { get; set; }
+
+        public IEnumerable<Field> Fields { get; set; } = new HashSet<Field>();
     }
 }

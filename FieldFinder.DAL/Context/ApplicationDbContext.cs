@@ -21,6 +21,8 @@ namespace FieldFinder.DAL.Context
         //    base.OnConfiguring(optionsBuilder);
         //}
         public DbSet<Coach> Coaches { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Field> Fields { get; set; }
 
 
     }

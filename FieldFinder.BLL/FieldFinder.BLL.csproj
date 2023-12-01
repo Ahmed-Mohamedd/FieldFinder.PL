@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\FieldFinder.DAL\FieldFinder.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FieldFinder.DAL\FieldFinder.DAL.csproj" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
