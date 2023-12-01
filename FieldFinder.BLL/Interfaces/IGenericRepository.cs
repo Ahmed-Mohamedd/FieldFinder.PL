@@ -15,7 +15,7 @@ namespace FieldFinder.BLL.Interfaces
         void Add(T t);  //create
 
         void Update(T t); //update
-        void Delete(T t); //d
+        void Delete(T t); //delete
 
     }
 }
