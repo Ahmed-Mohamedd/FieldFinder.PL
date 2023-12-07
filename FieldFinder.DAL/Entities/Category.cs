@@ -8,9 +8,13 @@ namespace FieldFinder.DAL.Entities
 {
     public  class Category
     {
+        public Category()
+        {
+                Fields =new HashSet<Field>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public IEnumerable<Field> Fields { get; set; } = new HashSet<Field>();
+        public IEnumerable<Field> Fields { get; set; }
     }
 }

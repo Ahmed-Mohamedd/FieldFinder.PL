@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Field>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Fields List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="field" asp-action="Create" class="btn btn-outline-primary ">
+                <i class="bi bi-patch-plus"></i> &nbsp; Add New Field
+            </a>
+        </div>
+    </div>
+</div>
+
+<partial name="_Notification" />
+<br />
+<br />
+
+<table class="table  table-bordered table-striped" style="width:100%">
+
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Location</th>
+            <th scope="col">HourRate</th>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var field in Model)
+        {
+
+            <tr class="table-success">
+                <td>@field.Name</td>
+                <td>@field.Description</td>
+                <td>@field.Location</td>
+                <td>@field.HourRate</td>
+                <td>@field.Category.Name</td>
+
+                <td><a asp-action="Edit" asp-route-id="@field.Id" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a></td>
+                <td><a asp-action="Delete" asp-route-id="@field.Id" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</a> </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

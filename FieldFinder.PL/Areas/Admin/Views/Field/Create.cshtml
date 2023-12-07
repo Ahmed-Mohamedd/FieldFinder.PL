@@ -1,0 +1,44 @@
+﻿@model FieldViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+
+
+
+<form method="post" asp-controller="Field" asp-action="Create" enctype="multipart/form-data">
+    <div class="row border p-3 mt-4 ">
+
+        <div class="row pb-2 ">
+            <h2 class="text-primary">@TempData["Operation"]</h2>
+            <hr />
+        </div>
+
+       <partial name="PartialViews/CreateEditFieldPartialView"/>
+
+
+        <div class="mb-3 col-6 ">
+            <button type="submit" class="btn btn-primary" style="width:150px">Create</button>|
+            <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+        </div>
+
+
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+
+    }
+}
+
+
+
+
+
+
+

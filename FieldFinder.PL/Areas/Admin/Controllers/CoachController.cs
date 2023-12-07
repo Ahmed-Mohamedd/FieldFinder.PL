@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FieldFinder.PL.Controllers
+namespace FieldFinder.PL.Areas.Admin.Controllers
 {
     public class CoachController : Controller
     {

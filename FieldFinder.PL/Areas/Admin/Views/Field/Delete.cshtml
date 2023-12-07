@@ -1,0 +1,67 @@
+﻿@model FieldViewModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<form method="post" asp-controller="Field" asp-action="Delete" enctype="multipart/form-data" >
+    <div class="row border p-3 mt-4 ">
+
+        <div class="row pb-2 ">
+            <h2 class="text-primary">Delete Product</h2>
+            <hr />
+        </div>
+        <input asp-for="Id" hidden/>
+        <input asp-for="ImageName" hidden/>
+
+        <div class="mb-3 row">
+
+            <div class="mb-3 col-6 ">
+                <div class="mb-3">
+                    <label asp-for="Name"></label>
+                    <input readonly asp-for="Name" class="form-control" />
+           
+                </div> 
+
+                 <div class="mb-3">
+                    <label asp-for="Description"></label>
+                    <textarea readonly asp-for="Description" class="form-control" rows="3" ></textarea>
+           
+                </div>
+                <div class="mb-3 ">
+                    <label asp-for="Location"></label>
+                    <input readonly asp-for="Location" class="form-control" />
+           
+                </div> 
+                <div class="mb-3 ">
+                    <label asp-for="HourRate"></label>
+                    <input readonly asp-for="HourRate" class="form-control" />
+           
+                </div> 
+
+                <div class="mb-3  ">
+                    <label asp-for="CategoryId"></label>
+                    <select readonly asp-for="CategoryId"  asp-items="ViewBag.CategoryList" class="form-select" >
+                        <option disabled selected>--Select Category--</option>
+                    </select>
+                </div> 
+            </div>
+
+            <div class="mb-3 col-6">
+                <img src="~/Files/Images/@Model.ImageName" class="rounded" width="100%" />
+            </div>
+
+        </div>
+
+
+        
+        <div class="mb-3 col-6 ">
+             <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>|
+             <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+        </div>
+       
+
+    </div>
+</form>

@@ -1,0 +1,44 @@
+﻿@model FieldViewModel
+@inject IUnitOfWork UnitOfWork
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+@{
+    //var Departments = new SelectList( ViewBag.Departments , "Id" , "Name");
+    var Categories = new SelectList(UnitOfWork.Categories.GetAll(), "Id", "Name");
+}
+
+<form method="post" asp-controller="Field" asp-action="Edit" enctype="multipart/form-data">
+    <div class="row border p-3 mt-4 ">
+        <input asp-for="Id" hidden/>
+        <input asp-for="ImageName" hidden />
+
+        <div class="row pb-2 ">
+            <h2 class="text-primary">@TempData["Operation"]</h2>
+            <hr />
+        </div>
+
+        <partial name="PartialViews/CreateEditFieldPartialView" />
+
+
+        <div class="mb-3 col-6 ">
+            <button type="submit" class="btn btn-warning" style="width:150px">Update</button>|
+            <a asp-action="Index" class="btn btn-outline-secondary">Back To List</a>
+        </div>
+
+
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+
+    }
+}
+
+
+

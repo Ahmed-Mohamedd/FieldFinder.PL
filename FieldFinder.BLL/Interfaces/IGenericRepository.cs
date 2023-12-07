@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ namespace FieldFinder.BLL.Interfaces
 
         void Update(T t); //update
         void Delete(T t); //delete
+        T GetById(Expression<Func<T , bool>> filter);
 
     }
 }
