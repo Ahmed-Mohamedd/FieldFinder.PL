@@ -3,9 +3,15 @@ using FieldFinder.BLL.Repositories;
 using FieldFinder.DAL.Context;
 using FieldFinder.PL.Mappers;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//configure Serilog in my Appliaction
+builder.Host.UseSerilog((context , configuration)=>
+configuration.ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
@@ -34,6 +40,9 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+// introduce the automatic HTTP request logging by serilog
+app.UseSerilogRequestLogging();
+
 app.UseStaticFiles();
 
 app.UseRouting();

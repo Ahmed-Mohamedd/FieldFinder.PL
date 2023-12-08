@@ -21,30 +21,30 @@ namespace FieldFinder.BLL.Repositories
         }
 
 
-        public void Add(T t)
+        public async void Add(T t)
         {
-            _dbContext.Set<T>().Add(t); //memory
+            await _dbContext.Set<T>().AddAsync(t); //memory
             //_dbContext.SaveChanges();  // db
         }
 
-        public void Delete(T t)
+        public async void Delete(T t)
         {
-            _dbContext.Set<T>().Remove(t);
+             _dbContext.Set<T>().Remove(t);
             //_dbContext.SaveChanges();
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             if(typeof(T) == typeof(Field))
-                return (IEnumerable<T>) _dbContext.Set<Field>().Include(f=> f.Category).ToList();
-            return _dbContext.Set<T>().ToList();
+                return (IEnumerable<T>) await _dbContext.Set<Field>().Include(f=> f.Category).ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync();
         }
-        public T GetById(Expression<Func<T, bool>> filter)
-            => _dbContext.Set<T>().FirstOrDefault(filter);
+        public async Task<T> GetById(Expression<Func<T, bool>> filter)
+            => await _dbContext.Set<T>().FirstOrDefaultAsync(filter);
 
-        public void Update(T t)
+        public async void Update(T t)
         {
-           _dbContext.Set<T>().Update(t);
+            _dbContext.Set<T>().Update(t);
             //_dbContext.SaveChanges();
         }
     }

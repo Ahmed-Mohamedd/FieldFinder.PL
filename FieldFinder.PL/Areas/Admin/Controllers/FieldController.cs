@@ -14,17 +14,21 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ILogger<FieldController> _logger;
 
-        public FieldController(IUnitOfWork unitOfWork, IMapper mapper)
+        public FieldController(IUnitOfWork unitOfWork, IMapper mapper , ILogger<FieldController> logger)
         {
             _unitOfWork=unitOfWork;
             _mapper=mapper;
+            _logger=logger;
+            _logger.LogInformation("Field Controller Called Successfully");
         }
 
         #region Index
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var Fields = _unitOfWork.Fields.GetAll();
+            _logger.LogInformation("Redirect To Index Page In Field Controller ");
+            var Fields = await _unitOfWork.Fields.GetAll();
             return View(Fields);
         }
 
@@ -47,14 +51,15 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(FieldViewModel fieldViewModel)
+        public async Task<IActionResult> Create(FieldViewModel fieldViewModel)
         {
             if (ModelState.IsValid)
             {
                 fieldViewModel.ImageName = DocumetSetting.UploadDocument(fieldViewModel.Image, "Images");
                 var MappedField = _mapper.Map<FieldViewModel, Field>(fieldViewModel);
                 _unitOfWork.Fields.Add(MappedField);
-                _unitOfWork.Save();
+                await _unitOfWork.Save();
+                _logger.LogInformation("A New Field Added Successfully to Database ");
                 TempData["Success"] = "Field Added Succcessfully";
                 return RedirectToAction(nameof(Index));
             }
@@ -67,12 +72,12 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
 
         #region Edit
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id==null || id==0)
                 return NotFound();
 
-            var Field = _unitOfWork.Fields.GetById(f => f.Id == id);
+            var Field = await _unitOfWork.Fields.GetById(f => f.Id == id);
             var FieldToEdit = _mapper.Map<Field, FieldViewModel>(Field);
             TempData["Operation"] = "Edit Field";
             return View(FieldToEdit);
@@ -80,7 +85,7 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id, FieldViewModel fieldViewModel)
+        public async Task<IActionResult> Edit([FromRoute] int id, FieldViewModel fieldViewModel)
         {
             if (fieldViewModel.Id != id)
                 return BadRequest();
@@ -89,8 +94,9 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
             {
                 var CastedField = _mapper.Map<FieldViewModel, Field>(fieldViewModel);
                 _unitOfWork.Fields.Update(CastedField);
-                _unitOfWork.Save();
-                TempData["Success"] = "Field Updated Succcessfully";
+                await _unitOfWork.Save();
+                _logger.LogInformation("Field Updated Successfully ");
+                TempData["Success"] = "Field Updated Succcessfully With its Old Image";
                 return RedirectToAction(nameof(Index));
             }
             else if (ModelState.IsValid)
@@ -98,10 +104,16 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
                 try
                 {
                     DocumetSetting.DeleteFile(fieldViewModel.ImageName, "Images");
+                    _logger.LogInformation("Field Old Image Deleted Successfully Before Uploading The New One ");
+
                     fieldViewModel.ImageName =  DocumetSetting.UploadDocument(fieldViewModel.Image, "Images");
+                    _logger.LogInformation("Field New Image Is Uploaded Successfully");
+
                     var CastedField = _mapper.Map<FieldViewModel, Field>(fieldViewModel);
                     _unitOfWork.Fields.Update(CastedField);
-                    _unitOfWork.Save();
+                    await _unitOfWork.Save();
+                    _logger.LogInformation("Field Updated Successfully With New Image");
+
                     TempData["Success"] = "Field Updated Succcessfully";
                     return RedirectToAction(nameof(Index));
                 }
@@ -118,27 +130,29 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
 
         #region Delete
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || id ==0)
                 return NotFound();
 
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Categories.GetAll().Select(c =>
+            var Categories = await _unitOfWork.Categories.GetAll();
+            IEnumerable<SelectListItem> CategoryList = Categories.Select(c =>
             new SelectListItem()
             {
                 Text = c.Name,
-                Value = c.Id.ToString()
-            });
+                Value = id.ToString()
+            }); 
+
             ViewBag.CategoryList = CategoryList;
 
-            var Field = _unitOfWork.Fields.GetById(f => f.Id == id);
+            var Field = await _unitOfWork.Fields.GetById(f => f.Id == id);
             var CastedField = _mapper.Map<Field, FieldViewModel>(Field);
             return View(CastedField);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete([FromRoute] int? id, FieldViewModel fieldViewModel)
+        public async Task<IActionResult> Delete([FromRoute] int? id, FieldViewModel fieldViewModel)
         {
             if (fieldViewModel.Id!=id)
                 return BadRequest();
@@ -146,8 +160,10 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
 
             var CastedField = _mapper.Map<FieldViewModel, Field>(fieldViewModel);
             DocumetSetting.DeleteFile(fieldViewModel.ImageName, "Images");
+            _logger.LogInformation("Field Image Deleted Successfully ");
             _unitOfWork.Fields.Delete(CastedField);
-            _unitOfWork.Save();
+            await _unitOfWork.Save();
+            _logger.LogInformation("Field Deleted From DB ");
             TempData["Success"]="Field Deleted Successfully";
             return RedirectToAction(nameof(Index));
 

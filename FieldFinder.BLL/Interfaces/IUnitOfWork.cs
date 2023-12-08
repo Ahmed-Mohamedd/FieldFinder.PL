@@ -11,7 +11,7 @@ namespace FieldFinder.BLL.Interfaces
         public IFieldRepository Fields { get;  }
         public ICategoryRepository Categories { get;  }
         public ICoachRepository Coaches { get;  }
-        public int Save();
+        public Task<int> Save();
 
     }
 }

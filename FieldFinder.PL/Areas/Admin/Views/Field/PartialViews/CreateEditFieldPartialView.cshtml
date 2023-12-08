@@ -5,7 +5,7 @@
 
 @{
     //var Departments = new SelectList( ViewBag.Departments , "Id" , "Name");
-    var Categories = new SelectList(UnitOfWork.Categories.GetAll(), "Id", "Name");
+    var Categories = new SelectList(await UnitOfWork.Categories.GetAll(), "Id", "Name");
 }
 
 

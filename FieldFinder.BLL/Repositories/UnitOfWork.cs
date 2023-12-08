@@ -25,7 +25,7 @@ namespace FieldFinder.BLL.Repositories
         public void Dispose()
             => _dbContext.Dispose();
 
-        public int Save()
-            => _dbContext.SaveChanges();
+        public async Task<int> Save()
+            => await _dbContext.SaveChangesAsync();
     }
 }
