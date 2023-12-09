@@ -1,11 +1,8 @@
 ﻿@model FieldViewModel
 @inject IUnitOfWork UnitOfWork
 
-
-
 @{
-    //var Departments = new SelectList( ViewBag.Departments , "Id" , "Name");
-    var Categories = new SelectList(await UnitOfWork.Categories.GetAll(), "Id", "Name");
+    var CategoryList = new SelectList(await UnitOfWork.Categories.GetAll(), "Id", "Name");
 }
 
 
@@ -44,7 +41,7 @@
 
 <div class="mb-3 ">
     <label asp-for="CategoryId"></label>
-    <select asp-for="CategoryId" asp-items="@Categories" class="form-select">
+    <select asp-for="CategoryId" asp-items="@CategoryList" class="form-select">
         <option disabled selected>--Select Category--</option>
     </select>
 

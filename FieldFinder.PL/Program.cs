@@ -33,7 +33,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository
 
 var app = builder.Build();
 
-
+// must be the first middleware, to ensure exceptions at all levels are handled
+app.UseMiddleware<BackofficeExceptionHandlerMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

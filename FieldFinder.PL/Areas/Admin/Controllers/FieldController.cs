@@ -37,9 +37,10 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
 
         #region Create
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            //var CategoryList = _unitOfWork.Categories.GetAll().Select(
+            //var Categories = await _unitOfWork.Categories.GetAll();
+            //IEnumerable<SelectListItem> CategoryList = Categories.Select(
             //    c => new SelectListItem()
             //    {
             //        Text = c.Name,
