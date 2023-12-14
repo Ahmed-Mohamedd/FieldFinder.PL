@@ -137,14 +137,22 @@ namespace FieldFinder.PL.Areas.Admin.Controllers
                 return NotFound();
 
             var Categories = await _unitOfWork.Categories.GetAll();
+            var Locations = await _unitOfWork.Locations.GetAll();
             IEnumerable<SelectListItem> CategoryList = Categories.Select(c =>
             new SelectListItem()
             {
                 Text = c.Name,
-                Value = id.ToString()
-            }); 
+                Value = c.Id.ToString()
+            });
+            IEnumerable<SelectListItem> LocationList = Locations.Select(l =>
+            new SelectListItem()
+            {
+                Text = l.Name,
+                Value = l.Id.ToString()
+            });
 
             ViewBag.CategoryList = CategoryList;
+            ViewBag.LocationList = LocationList;
 
             var Field = await _unitOfWork.Fields.GetById(f => f.Id == id);
             var CastedField = _mapper.Map<Field, FieldViewModel>(Field);

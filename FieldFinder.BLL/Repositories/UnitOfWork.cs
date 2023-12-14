@@ -13,7 +13,9 @@ namespace FieldFinder.BLL.Repositories
         private readonly ApplicationDbContext _dbContext;
         public IFieldRepository Fields        { get ;private  set; }
         public ICategoryRepository Categories { get ;private set ; }
+        public ILocationRepository Locations { get ;private set ; }
         public ICoachRepository Coaches       { get ;private set; }
+
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
@@ -21,6 +23,7 @@ namespace FieldFinder.BLL.Repositories
             Fields = new FieldRepository(dbContext);
             Categories = new CategoryRepository(dbContext);
             Coaches = new CoachRepository(dbContext);
+            Locations = new LocationRepository(dbContext);
         }
         public void Dispose()
             => _dbContext.Dispose();

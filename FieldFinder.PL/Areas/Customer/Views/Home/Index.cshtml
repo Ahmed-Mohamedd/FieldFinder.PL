@@ -1,8 +1,133 @@
-﻿@{
+﻿@model HomeIndexViewModel
+@inject IUnitOfWork unitofwork
+@inject IUnitOfWork unitofwork
+
+@{
     ViewData["Title"] = "Home Page";
 }
+
+@{
+    // var CategoryList = new SelectList(await unitofwork.Categories.GetAll(), "Id", "Name");
+    // var LocationList = new SelectList(await unitofwork.Locations.GetAll(), "Id", "Name");
+}
+
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3 ">
+                <label asp-for="LocationId"></label>
+                <select id="location" asp-for="LocationId" asp-items="@(new SelectList(Model.Locations , "Id" , "Name"))" class="form-select">
+                    <option disabled selected>--Select Location--</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3 ">
+                <label asp-for="CategoryId"></label>
+                <select id="category" asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories , "Id" , "Name"))" class="form-select">
+                    <option disabled selected>--Select Category--</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3" id="product-container">
+        <!-- Product cards will be dynamically added here -->
+    </div>
+</div>
+
+
+@section Scripts{
+
+<script>
+
+    $(document).ready(function() {
+        // Event listeners for dropdown changes
+        $('#category, #location').change(function () {
+            const locationId = $('#location').val();
+            const categoryId = $('#category').val();
+                console.log(locationId + " " +categoryId)
+                renderProductCards(locationId, categoryId);
+        });
+
+        // // Initial rendering with all products
+        // renderProductCards('', '');
+
+        
+    });
+
+        // Function to render product cards based on category and location
+
+        function renderProductCards(locationId, categoryId) {
+            $.ajax({
+                url: `Customer/Home/GetFields?locationId=` + locationId + `&categoryId=` + categoryId, // Replace with your actual API endpoint
+                method: 'GET',
+
+                success: function (fields) {
+                    console.log(fields);
+                    const container = $('#product-container');
+                    container.empty();
+                    $.each(fields, function (i, field) {
+                        const card = $(`<div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="E:/1-(EraaSoft)/.NetCore Mvc  (.net6)/FieldFinder.PL/FieldFinder.PL/wwwroot/Files/Images/${field.imageName}" class="card-img-top" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${field.name}</h5>
+                                                    <p class="card-text">${field.description}</p>
+                                                </div>
+                                                <div class="card-body">
+                                                     <a href="Customer/Home/Details?id=${field.id}" class="card-link btn btn-warning">Details</a>
+                                                </div>
+                                            </div>
+                                        </div>`);
+                                container.append(card);
+                    });
+                   
+                    // data.foreach(product => {
+                    //     const card = $('<div class="col-md-4">' +
+                    //         '<div class="card">' +
+                    //         '<div class="card-body">' +
+                    //         '<h5 class="card-title">' + product.name + '</h5>' +
+                    //         '<p class="card-text">category: ' + product.category.name + '</p>' +
+                    //         '<p class="card-text">location: ' + product.location.name + '</p>' +
+                    //         '</div>' +
+                    //         '</div>' +
+                    //         '</div>');
+                    //     container.append(card);
+                    // });
+                },
+                error: function (error) {
+                    console.error('Error fetching products:', error);
+                }
+            });
+        }
+
+   
+</script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

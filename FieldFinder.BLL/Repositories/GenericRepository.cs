@@ -36,7 +36,7 @@ namespace FieldFinder.BLL.Repositories
         public async Task<IEnumerable<T>> GetAll()
         {
             if(typeof(T) == typeof(Field))
-                return (IEnumerable<T>) await _dbContext.Set<Field>().Include(f=> f.Category).ToListAsync();
+                return (IEnumerable<T>) await _dbContext.Set<Field>().Include(f=> f.Category).Include(f=> f.Location).ToListAsync();
             return await _dbContext.Set<T>().ToListAsync();
         }
         public async Task<T> GetById(Expression<Func<T, bool>> filter)
