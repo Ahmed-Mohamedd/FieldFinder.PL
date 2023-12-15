@@ -28,8 +28,7 @@ builder.Services.AddAutoMapper(m => m.AddProfile(new FieldProfile()));
 // Add Scoped for DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-//allow Di for scope
-builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+
 
 var app = builder.Build();
 
