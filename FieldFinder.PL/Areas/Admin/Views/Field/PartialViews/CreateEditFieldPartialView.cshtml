@@ -4,6 +4,10 @@
 @{
     var CategoryList = new SelectList(await UnitOfWork.Categories.GetAll(), "Id", "Name");
 }
+@{
+    var LocationList = new SelectList(await UnitOfWork.Locations.GetAll(), "Id", "Name");
+}
+
 
 
 <div asp-validation-summary=All class="text-danger"></div>
@@ -20,12 +24,7 @@
     <span asp-validation-for="Description" class="text-danger"></span>
 </div>
 
-<div class="mb-3 col-6">
-    <label asp-for="Location"></label>
-    <input asp-for="Location" class="form-control" />
-    <span asp-validation-for="Location" class="text-danger"></span>
-</div>
-<div class="mb-3 col-6">
+<div class="mb-3 ">
     <label asp-for="HourRate"></label>
     <input asp-for="HourRate" class="form-control" />
     <span asp-validation-for="HourRate" class="text-danger"></span>
@@ -46,6 +45,15 @@
     </select>
 
     <span asp-validation-for="CategoryId" class="text-danger"></span>
+</div>
+
+<div class="mb-3 ">
+    <label asp-for="LocationId"></label>
+    <select asp-for="LocationId" asp-items="@LocationList" class="form-select">
+        <option disabled selected>--Select Location--</option>
+    </select>
+
+    <span asp-validation-for="LocationId" class="text-danger"></span>
 </div>
 
 

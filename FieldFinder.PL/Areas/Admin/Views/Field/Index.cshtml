@@ -30,9 +30,9 @@
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
-            <th scope="col">Location</th>
             <th scope="col">HourRate</th>
             <th scope="col">Category</th>
+            <th scope="col">Location</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
 
@@ -47,9 +47,9 @@
             <tr class="table-success">
                 <td>@field.Name</td>
                 <td>@field.Description</td>
-                <td>@field.Location</td>
                 <td>@field.HourRate</td>
                 <td>@field.Category.Name</td>
+                <td>@field.Location.Name</td>
 
                 <td><a asp-action="Edit" asp-route-id="@field.Id" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a></td>
                 <td><a asp-action="Delete" asp-route-id="@field.Id" class="btn btn-danger"><i class="bi bi-trash"></i> Delete</a> </td>

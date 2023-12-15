@@ -1,0 +1,40 @@
+﻿
+
+@model Coach
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Add New Coach</h1>
+<br />
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="YearsExperience"></label>
+        <input class="form-control" asp-for="YearsExperience" />
+    </div>
+
+    <button type="submit" value="Submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Index" asp-controller="Coach" class="btn btn-light">Back To List</a>
+
+
+
+</form>
+
+
+

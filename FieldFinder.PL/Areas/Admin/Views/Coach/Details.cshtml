@@ -1,0 +1,36 @@
+﻿
+
+@model Coach
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Coach @Model.Name Details</h1>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Name"></label>
+        <input readonly class="form-control" asp-for="Name" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Phone"></label>
+        <input readonly class="form-control" asp-for="Phone" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Email"></label>
+        <input readonly class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="YearsExperience"></label>
+        <input readonly class="form-control" asp-for="YearsExperience" />
+    </div>
+
+    <a asp-action="Edit" asp-controller="Coach" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+    <a asp-action="Index" class="btn btn-light"> Back To List  </a>
+
+
+
+

@@ -15,7 +15,7 @@ function LoadDataTable() {
             {"data":"id" , "width" : "15%"},
             {"data":"name" , "width" : "15%"},
             {"data":"description" , "width" : "15%"},
-            {"data":"location" , "width" : "15%"},
+            {"data":"location.name" , "width" : "15%"},
             {"data":"hourRate" , "width" : "15%"}
 
            

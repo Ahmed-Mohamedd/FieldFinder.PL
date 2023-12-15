@@ -12,8 +12,7 @@ namespace FieldFinder.PL.Models
         public string Name { get; set; }
         [Required]
         public string? Description { get; set; }
-        [Required(ErrorMessage ="Location Is Required Attribute")]
-        public string Location { get; set; }
+  
        
         
 
@@ -25,6 +24,11 @@ namespace FieldFinder.PL.Models
         [DisplayName("Category")]
         [Required(ErrorMessage ="Specifing Field Category Is a Mandatory")]
         public int CategoryId { get; set; }
+
+
+        [DisplayName("Location")]
+        [Required(ErrorMessage = "Specifing Field Location Is a Mandatory")]
+        public int LocationId { get; set; }
 
 
         public IFormFile Image { get; set; }

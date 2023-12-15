@@ -9,18 +9,14 @@ using System.Threading.Tasks;
 
 namespace FieldFinder.BLL.Repositories
 {
-    public class CoachRepository:GenericRepository<Coach> , ICoachRepository
+    public class LocationRepository:GenericRepository<Location> , ILocationRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public CoachRepository(ApplicationDbContext dbContext):base(dbContext)
+        public LocationRepository(ApplicationDbContext dbContext):base(dbContext)
         {
-            _dbContext=dbContext;
-        }
 
-        public async Task<Coach> GetById(int value)
-        {
-            throw new NotImplementedException();
+            _dbContext=dbContext;
         }
     }
 }
