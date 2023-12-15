@@ -1,0 +1,60 @@
+﻿
+
+@model IEnumerable<Coach>
+@{
+  
+    ViewData["Title"] = "Coaches";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+
+}
+<a asp-action="Create" class="btn btn-success">Add New Coach</a>
+@if (Model.Count() > 0)
+{
+    <h1>All Coaches</h1>
+    <br />
+    <table class="table table-striped table-hover mt-3">
+        <thead>
+            <tr>
+                <td>@Html.DisplayNameFor(D=>D.Name)</td>
+                <td>@Html.DisplayNameFor(D=>D.Phone)</td>
+                <td>@Html.DisplayNameFor(D=>D.Email)</td>
+                <td>@Html.DisplayNameFor(D=>D.YearsExperience)</td>
+                <td>Details</td>
+                <td>Update</td>
+                <td>Delete</td>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var coach in Model)
+            {
+                <tr>
+                    <td>@coach.Name</td>
+                    <td>@coach.Phone</td>
+                    <td>@coach.Email</td>
+                    <td>@coach.YearsExperience</td>
+                    <td><a asp-action="Details" asp-controller="Coach" asp-route-id="@coach.Id">Details</a></td>
+                    <td><a asp-action="Edit" asp-route-id="@coach.Id">Edit</a></td> 
+                    <td><a asp-action="Delete" asp-route-id="@coach.Id">Delete</a></td> 
+                </tr>
+
+            }
+
+
+        </tbody>
+
+    </table>
+}
+else
+{
+    <div class="mt-5 alert-warning">
+        <h3>there is no coach</h3>
+    </div>
+}
+
+
+
+
+

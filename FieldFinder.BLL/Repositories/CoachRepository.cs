@@ -17,5 +17,10 @@ namespace FieldFinder.BLL.Repositories
         {
             _dbContext=dbContext;
         }
+
+        public async Task<Coach> GetById(int value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
