@@ -30,11 +30,7 @@
                     <textarea readonly asp-for="Description" class="form-control" rows="3" ></textarea>
            
                 </div>
-                <div class="mb-3 ">
-                    <label asp-for="Location"></label>
-                    <input readonly asp-for="Location" class="form-control" />
-           
-                </div> 
+                
                 <div class="mb-3 ">
                     <label asp-for="HourRate"></label>
                     <input readonly asp-for="HourRate" class="form-control" />
@@ -47,6 +43,13 @@
                         <option disabled selected>--Select Category--</option>
                     </select>
                 </div> 
+
+                <div class="mb-3  ">
+                    <label asp-for="LocationId"></label>
+                    <select readonly asp-for="LocationId" asp-items="ViewBag.LocationList" class="form-select">
+                        <option disabled selected>--Select Location--</option>
+                    </select>
+                </div>
             </div>
 
             <div class="mb-3 col-6">

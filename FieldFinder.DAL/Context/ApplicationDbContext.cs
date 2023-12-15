@@ -22,8 +22,10 @@ namespace FieldFinder.DAL.Context
         //}
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Field> Fields { get; set; }
-
+        
+      
 
     }
 }
