@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FieldFinder.BLL.Interfaces
 {
-    public interface ICoachRepository:IGenericRepository<Coach>
+    public interface ICoachRepository : IGenericRepository<Coach>
     {
-
+        Task<Coach> GetById(int value);
     }
 }

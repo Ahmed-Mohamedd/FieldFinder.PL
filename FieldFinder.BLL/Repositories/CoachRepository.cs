@@ -17,5 +17,7 @@ namespace FieldFinder.BLL.Repositories
         {
             _dbContext=dbContext;
         }
+
+        
     }
 }

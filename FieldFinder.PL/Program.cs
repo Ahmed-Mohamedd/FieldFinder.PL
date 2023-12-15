@@ -9,6 +9,8 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 
+
+
 //configure Serilog in my Appliaction
 builder.Host.UseSerilog((context , configuration)=>
 configuration.ReadFrom.Configuration(context.Configuration));
@@ -27,6 +29,8 @@ builder.Services.AddAutoMapper(m => m.AddProfile(new FieldProfile()));
 
 // Add Scoped for DI
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 
 

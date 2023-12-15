@@ -1,0 +1,39 @@
+﻿@model Coach
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Coach @Model.Name Information</h1>
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="col-form-label" asp-for="YearsExperience"></label>
+        <input class="form-control" asp-for="YearsExperience" />
+        <span asp-validation-for="YearsExperience" class="text-danger"></span>
+    </div>
+
+    <button type="submit" value="Save" class="btn btn-primary">save</button>
+    <a asp-action="Index"  class="btn btn-light">Back To List</a>
+
+
+
+</form>
